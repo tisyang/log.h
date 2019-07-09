@@ -18,6 +18,12 @@
 // Enable time stamp with date, 0 to disable.
 #define LOG_ENABLE_DATE     1
 
+// Enable time will cause compiler error in C++.
+#ifdef __cplusplus
+#undef  LOG_ENABLE_TIME
+#define LOG_ENABLE_TIME     0
+#endif
+
 // If enable terminal color
 #if LOG_ENABLE_COLOR
 # define COLOR_TRACE   "\x1b[94m"
