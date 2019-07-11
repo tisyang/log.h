@@ -24,6 +24,11 @@
 #define LOG_ENABLE_TIME     0
 #endif
 
+#ifdef _WIN32
+#undef  LOG_ENABLE_COLOR
+#define LOG_ENABLE_COLOR 0
+#endif
+
 // If enable terminal color
 #if LOG_ENABLE_COLOR
 # define COLOR_TRACE   "\x1b[94m"
