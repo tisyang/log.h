@@ -49,7 +49,11 @@
 // If enable log error to stderr.
 // For some MCU platform, only printf is support.
 #if LOG_ENABLE_STDERR
-# define LOG_STDOUT(...)     fprintf(stdout, __VA_ARGS__)
+# define LOG_STDOUT(...)     do {\
+    fprintf(stdout, __VA_ARGS__); \
+    fflush(stdout); \
+} while (0)
+
 # define LOG_STDERR(...)     fprintf(stderr, __VA_ARGS__)
 #else
 # define LOG_STDOUT(...)     printf(__VA_ARGS__)
