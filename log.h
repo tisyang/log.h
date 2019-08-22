@@ -7,26 +7,32 @@
 
 #include <stdio.h>
 
-// Enable terminal color, 0 to disable.
-#define LOG_ENABLE_COLOR    1
-// Enable log error to stderr, 0 to disable.
-// In MCU platform, when only printf is support, should be disabled.
-#define LOG_ENABLE_STDERR   1
-// Enable time stamp, 0 to disable.
-// In MCU platform, when time library is not support, should be disabled.
-#define LOG_ENABLE_TIME     1
-// Enable time stamp with date, 0 to disable.
-#define LOG_ENABLE_DATE     1
-
 // Enable time will cause compiler error in C++.
 #ifdef __cplusplus
-#undef  LOG_ENABLE_TIME
-#define LOG_ENABLE_TIME     0
+#define LOG_DISABLE_TIME
 #endif
 
 #ifdef _WIN32
-#undef  LOG_ENABLE_COLOR
-#define LOG_ENABLE_COLOR 0
+#define LOG_DISABLE_COLOR
+#endif
+
+// Enable terminal color, 0 to disable.
+#ifndef LOG_DISABLE_COLOR
+# define LOG_ENABLE_COLOR    1
+#endif
+// Enable log error to stderr, 0 to disable.
+// In MCU platform, when only printf is support, should be disabled.
+#ifndef LOG_DISABLE_STDERR
+# define LOG_ENABLE_STDERR   1
+#endif
+// Enable time stamp, 0 to disable.
+// In MCU platform, when time library is not support, should be disabled.
+#ifndef LOG_DISABLE_TIME
+# define LOG_ENABLE_TIME     1
+#endif
+// Enable time stamp with date, 0 to disable.
+#ifndef LOG_DISABLE_DATE
+# define LOG_ENABLE_DATE     1
 #endif
 
 // If enable terminal color
